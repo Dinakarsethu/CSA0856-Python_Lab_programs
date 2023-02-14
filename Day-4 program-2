@@ -1,0 +1,13 @@
+#Day-4 program-2 Write a program to find the number of student users in the college, get the total users, staff users details from the client. Note for every 3 staff user there is one Non-teaching staff user assigned by default
+
+num_students = int(input("Enter the number of student users: "))
+total_users = int(input("Enter the total number of users: "))
+
+# calculate number of staff users and non-teaching staff users
+num_staff = total_users - num_students
+num_non_teaching_staff = num_staff // 3
+
+# print the results
+print("Number of student users: ", num_students)
+print("Number of staff users: ", num_staff)
+print("Number of non-teaching staff users: ", num_non_teaching_staff)
