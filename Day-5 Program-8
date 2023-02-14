@@ -1,0 +1,33 @@
+#Day-5 program-8 Given a matrix of size N * N containing only 0s and 1s, where 0 represents white and 1 represents black. The task is to minimize the number of swaps to form a valid chessboard. Only 2 rows or 2 columns can be swapped with each other.If it is impossible to form a chessboard, return -1.
+
+def check_valid(board):
+    # Check if the board is valid for swapping
+    n = len(board)
+    cnt = [0, 0]
+    for i in range(n):
+        for j in range(n):
+            if board[i][j] != (i + j) % 2:
+                return -1
+            cnt[board[i][j]] += 1
+    if abs(cnt[0] - cnt[1]) > 1:
+        return -1
+    return cnt[1] if cnt[0] > cnt[1] else cnt[0]
+
+def min_swaps(board):
+    n = len(board)
+    # Check if the board is valid for swapping
+    cnt = check_valid(board)
+    if cnt == -1:
+        return -1
+
+    # Count the number of swaps needed for each row and column
+    row_swaps = sum([board[i][0] != i % 2 for i in range(n)])
+    col_swaps = sum([board[0][j] != j % 2 for j in range(n)])
+    row_swaps = min(row_swaps, n - row_swaps)
+    col_swaps = min(col_swaps, n - col_swaps)
+
+    # Return the minimum number of swaps needed
+    if n % 2 == 0:
+        return min(row_swaps, col_swaps)
+    else:
+        return cnt // 2 if cnt % 2 == 0 else -1
